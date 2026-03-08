@@ -26,13 +26,12 @@ class gw2_installer extends abstract_game_install
 	 */
 	protected function install_factions()
 	{
-		global $db;
 
-		$db->sql_query('DELETE FROM ' . $this->table('bb_factions_table') . " WHERE game_id = '" . $db->sql_escape($this->game_id) . "'");
+		$this->db->sql_query('DELETE FROM ' . $this->table('bb_factions_table') . " WHERE game_id = '" . $this->db->sql_escape($this->game_id) . "'");
 		$sql_ary = array();
 		$sql_ary[] = array('game_id' => $this->game_id, 'faction_id' => 1, 'faction_name' => 'Tyria');
 		$sql_ary[] = array('game_id' => $this->game_id, 'faction_id' => 2, 'faction_name' => 'Zaithan');
-		$db->sql_multi_insert($this->table('bb_factions_table'), $sql_ary);
+		$this->db->sql_multi_insert($this->table('bb_factions_table'), $sql_ary);
 	}
 
 	/**
@@ -40,9 +39,8 @@ class gw2_installer extends abstract_game_install
 	 */
 	protected function install_classes()
 	{
-		global $db;
 
-		$db->sql_query('DELETE FROM ' . $this->table('bb_classes_table') . " WHERE game_id = '" . $db->sql_escape($this->game_id) . "'");
+		$this->db->sql_query('DELETE FROM ' . $this->table('bb_classes_table') . " WHERE game_id = '" . $this->db->sql_escape($this->game_id) . "'");
 		$sql_ary = array();
 		$sql_ary[] = array('game_id' => $this->game_id, 'class_id' => 0, 'class_faction_id' => 1, 'class_armor_type' => 'CLOTH',   'class_min_level' => 1, 'class_max_level' => 80, 'colorcode' => '#A9ABA0', 'imagename' => 'gw2_unknown');
 		$sql_ary[] = array('game_id' => $this->game_id, 'class_id' => 1, 'class_faction_id' => 1, 'class_armor_type' => 'PLATE',   'class_min_level' => 1, 'class_max_level' => 80, 'colorcode' => '#FFE8B3', 'imagename' => 'gw2_warrior');
@@ -54,11 +52,11 @@ class gw2_installer extends abstract_game_install
 		$sql_ary[] = array('game_id' => $this->game_id, 'class_id' => 7, 'class_faction_id' => 1, 'class_armor_type' => 'ROBE',    'class_min_level' => 1, 'class_max_level' => 80, 'colorcode' => '#C595DD', 'imagename' => 'gw2_mesmer');
 		$sql_ary[] = array('game_id' => $this->game_id, 'class_id' => 8, 'class_faction_id' => 1, 'class_armor_type' => 'ROBE',    'class_min_level' => 1, 'class_max_level' => 80, 'colorcode' => '#73B78A', 'imagename' => 'gw2_necromancer');
 		$sql_ary[] = array('game_id' => $this->game_id, 'class_id' => 9, 'class_faction_id' => 1, 'class_armor_type' => 'PLATE',   'class_min_level' => 1, 'class_max_level' => 80, 'colorcode' => '#B1574C', 'imagename' => 'gw2_revenant');
-		$db->sql_multi_insert($this->table('bb_classes_table'), $sql_ary);
+		$this->db->sql_multi_insert($this->table('bb_classes_table'), $sql_ary);
 		unset($sql_ary);
 
 		// Class names in multiple languages
-		$db->sql_query('DELETE FROM ' . $this->table('bb_language_table') . " WHERE game_id = '" . $db->sql_escape($this->game_id) . "' AND attribute = 'class'");
+		$this->db->sql_query('DELETE FROM ' . $this->table('bb_language_table') . " WHERE game_id = '" . $this->db->sql_escape($this->game_id) . "' AND attribute = 'class'");
 		$sql_ary = array();
 
 		// en
@@ -109,7 +107,7 @@ class gw2_installer extends abstract_game_install
 		$sql_ary[] = array('game_id' => $this->game_id, 'attribute_id' => 8, 'language' => 'it', 'attribute' => 'class', 'name' => 'Necromancer',   'name_short' => 'Necromancer');
 		$sql_ary[] = array('game_id' => $this->game_id, 'attribute_id' => 9, 'language' => 'it', 'attribute' => 'class', 'name' => 'Revenant',      'name_short' => 'Revenant');
 
-		$db->sql_multi_insert($this->table('bb_language_table'), $sql_ary);
+		$this->db->sql_multi_insert($this->table('bb_language_table'), $sql_ary);
 	}
 
 	/**
@@ -117,9 +115,8 @@ class gw2_installer extends abstract_game_install
 	 */
 	protected function install_races()
 	{
-		global $db;
 
-		$db->sql_query('DELETE FROM ' . $this->table('bb_races_table') . " WHERE game_id = '" . $db->sql_escape($this->game_id) . "'");
+		$this->db->sql_query('DELETE FROM ' . $this->table('bb_races_table') . " WHERE game_id = '" . $this->db->sql_escape($this->game_id) . "'");
 		$sql_ary = array();
 		$sql_ary[] = array('game_id' => $this->game_id, 'race_id' => 0, 'race_faction_id' => 1, 'image_female' => 'gw2_unknown', 'image_male' => 'gw2_unknown');
 		$sql_ary[] = array('game_id' => $this->game_id, 'race_id' => 1, 'race_faction_id' => 1, 'image_female' => 'gw2_sylvari', 'image_male' => 'gw2_sylvari');
@@ -127,11 +124,11 @@ class gw2_installer extends abstract_game_install
 		$sql_ary[] = array('game_id' => $this->game_id, 'race_id' => 3, 'race_faction_id' => 1, 'image_female' => 'gw2_charr',   'image_male' => 'gw2_charr');
 		$sql_ary[] = array('game_id' => $this->game_id, 'race_id' => 4, 'race_faction_id' => 1, 'image_female' => 'gw2_asura',   'image_male' => 'gw2_asura');
 		$sql_ary[] = array('game_id' => $this->game_id, 'race_id' => 5, 'race_faction_id' => 1, 'image_female' => 'gw2_human',   'image_male' => 'gw2_human');
-		$db->sql_multi_insert($this->table('bb_races_table'), $sql_ary);
+		$this->db->sql_multi_insert($this->table('bb_races_table'), $sql_ary);
 		unset($sql_ary);
 
 		// Race names
-		$db->sql_query('DELETE FROM ' . $this->table('bb_language_table') . " WHERE game_id = '" . $db->sql_escape($this->game_id) . "' AND attribute = 'race'");
+		$this->db->sql_query('DELETE FROM ' . $this->table('bb_language_table') . " WHERE game_id = '" . $this->db->sql_escape($this->game_id) . "' AND attribute = 'race'");
 		$sql_ary = array();
 
 		// en
@@ -166,7 +163,7 @@ class gw2_installer extends abstract_game_install
 		$sql_ary[] = array('game_id' => $this->game_id, 'attribute_id' => 4, 'language' => 'it', 'attribute' => 'race', 'name' => 'Asura',       'name_short' => 'Asura');
 		$sql_ary[] = array('game_id' => $this->game_id, 'attribute_id' => 5, 'language' => 'it', 'attribute' => 'race', 'name' => 'Umani',       'name_short' => 'Umani');
 
-		$db->sql_multi_insert($this->table('bb_language_table'), $sql_ary);
+		$this->db->sql_multi_insert($this->table('bb_language_table'), $sql_ary);
 	}
 
 	/**
@@ -175,17 +172,16 @@ class gw2_installer extends abstract_game_install
 	 */
 	protected function install_roles()
 	{
-		global $db;
 
-		$db->sql_query('DELETE FROM ' . $this->table('bb_gameroles_table') . " WHERE role_id < 3 AND game_id = '" . $db->sql_escape($this->game_id) . "'");
-		$db->sql_query('DELETE FROM ' . $this->table('bb_language_table') . " WHERE attribute_id < 3 AND attribute = 'role' AND game_id = '" . $db->sql_escape($this->game_id) . "'");
+		$this->db->sql_query('DELETE FROM ' . $this->table('bb_gameroles_table') . " WHERE role_id < 3 AND game_id = '" . $this->db->sql_escape($this->game_id) . "'");
+		$this->db->sql_query('DELETE FROM ' . $this->table('bb_language_table') . " WHERE attribute_id < 3 AND attribute = 'role' AND game_id = '" . $this->db->sql_escape($this->game_id) . "'");
 
 		$sql_ary = array(
 			array('game_id' => $this->game_id, 'role_id' => 0, 'role_color' => '#FF4455', 'role_icon' => 'dps_icon'),
 			array('game_id' => $this->game_id, 'role_id' => 1, 'role_color' => '#11FF77', 'role_icon' => 'healer_icon'),
 			array('game_id' => $this->game_id, 'role_id' => 2, 'role_color' => '#c3834c', 'role_icon' => 'tank_icon'),
 		);
-		$db->sql_multi_insert($this->table('bb_gameroles_table'), $sql_ary);
+		$this->db->sql_multi_insert($this->table('bb_gameroles_table'), $sql_ary);
 
 		$sql_ary = array(
 			// en
@@ -205,6 +201,6 @@ class gw2_installer extends abstract_game_install
 			array('game_id' => $this->game_id, 'attribute_id' => 1, 'language' => 'it', 'attribute' => 'role', 'name' => 'Supporto',    'name_short' => 'Supporto'),
 			array('game_id' => $this->game_id, 'attribute_id' => 2, 'language' => 'it', 'attribute' => 'role', 'name' => 'Controllo',   'name_short' => 'Controllo'),
 		);
-		$db->sql_multi_insert($this->table('bb_language_table'), $sql_ary);
+		$this->db->sql_multi_insert($this->table('bb_language_table'), $sql_ary);
 	}
 }
